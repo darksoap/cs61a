@@ -11,13 +11,12 @@ test = {
           ...     print(s0, s1)
           ...     return echo
           >>> s0, s1 = play(always_roll(1), always_roll(1), dice=make_test_dice(3), goal=4, say=echo)
-          d7882c94106188a2f424c5383b507923
-          b706c6a1e63c19ed82e4eb95fc6ba1cf
-          519a2e7c2e74bf29cb97b470402b22a2
-          # locked
+          3 0
+          3 3
+          6 3
           """,
           'hidden': False,
-          'locked': True
+          'locked': False
         },
         {
           'code': r"""
@@ -26,16 +25,15 @@ test = {
           ...     print(s0, s1)
           ...     return echo
           >>> s0, s1 = play(always_roll(0), always_roll(3), dice=make_test_dice(4, 2, 4), goal=15, say=echo)
-          46384f1b91067efe2db7061edf72cafa
-          253a8c4696c85daa9dc16cd817029432
-          d4513cc251c0704adcba2a6aadd09d6b
-          f19614cf9d63416a5804877d1ce54922
-          a2c850553746865cf4988fa443de9287
-          66df447fe530de7e49eb39945c42ae04
-          # locked
+          1 0
+          10 1
+          11 1
+          11 11
+          13 11
+          21 13
           """,
           'hidden': False,
-          'locked': True
+          'locked': False
         },
         {
           'code': r"""
@@ -48,14 +46,13 @@ test = {
           ...     print(s0, s1)
           ...     return total
           >>> s0, s1 = play(always_roll(1), always_roll(1), dice=make_test_dice(2, 3), goal=5, say=echo)
-          accd0f5c57e0f3fad13791aaecafc38b
-          26f5762c932a578994ea1c8fc7fa6c02
-          e3bcdb2715b868db45692ec2a5971a84
-          70e71b420a966665c548a3bb2cb30d7d
-          # locked
+          2 0
+          5
+          4 3
+          10
           """,
           'hidden': False,
-          'locked': True
+          'locked': False
         }
       ],
       'scored': True,
@@ -78,12 +75,11 @@ test = {
           ...     print('**', s1)
           ...     return echo_1
           >>> s0, s1 = play(always_roll(1), always_roll(1), dice=make_test_dice(2), goal=1, say=both(echo_0, echo_1))
-          3f321d5ce997d2f3989685f56de8bdce
-          4a64fe964dc771a219ed773c3a146c75
-          # locked
+          * 2
+          ** 0
           """,
           'hidden': False,
-          'locked': True
+          'locked': False
         },
         {
           'code': r"""
