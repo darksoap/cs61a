@@ -12,3 +12,7 @@ def sum_digits(n):
     45
     """
     "*** YOUR CODE HERE ***"
+    total = 0
+    while n > 0:
+        total, n = total + n % 10, n // 10
+    return total

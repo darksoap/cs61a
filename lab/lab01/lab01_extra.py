@@ -10,7 +10,7 @@ def both_positive(x, y):
     >>> both_positive(1, 1)
     True
     """
-    return x and y > 0 # You can replace this line!
+    return x > 0 and y > 0 # You can replace this line!
 
 # While Loops
 
@@ -27,6 +27,10 @@ def falling(n, k):
     4
     """
     "*** YOUR CODE HERE ***"
+    total, time = 1 ,n - k
+    while n > time:
+        total, n = total * n, n - 1
+    return total
 
 def double_eights(n):
     """Return true if n has two eights in a row.
@@ -44,6 +48,17 @@ def double_eights(n):
     False
     """
     "*** YOUR CODE HERE ***"
+    prev_eight = False
+    while n > 0:
+        last_digit = n % 10
+        if last_digit == 8 and prev_eight:
+            return True
+        elif last_digit == 8:
+            prev_eight = True
+        else:
+            prev_eight = False
+        n = n // 10
+    return False
 
 # Guessing Game
 
@@ -68,6 +83,9 @@ def guess_linear():
     num_guesses = 1
     guess = LOWER
     "*** YOUR CODE HERE ***"
+    while not is_correct(guess):
+        guess += 1
+        num_guesses += 1
     return num_guesses
 
 def guess_binary():
@@ -83,6 +101,13 @@ def guess_binary():
     lower, upper = LOWER, UPPER
     guess = (lower + upper) // 2
     "*** YOUR CODE HERE ***"
+    while not is_correct(guess):
+        if is_too_high(guess):
+            upper = guess - 1
+        else:
+            lower = guess + 1
+        guess = (lower + upper) // 2
+        num_guesses += 1
     return num_guesses
 
 # Receive user input. You do not need to understand the code below this line.
