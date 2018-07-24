@@ -12,9 +12,9 @@ def a_plus_abs_b(a, b):
     5
     """
     if b < 0:
-        f = _____
+        f = sub
     else:
-        f = _____
+        f = add
     return f(a, b)
 
 # Q2
@@ -31,7 +31,7 @@ def two_of_three(a, b, c):
     >>> two_of_three(5, 5, 5)
     50
     """
-    return _____
+    return max(a*a+b*b, a*a+c*c, b*b+c*c)
 
 # Q3
 def largest_factor(n):
@@ -45,8 +45,14 @@ def largest_factor(n):
     1
     """
     "*** YOUR CODE HERE ***"
+    factor, large_factor = 1, 0
+    while factor < n:
+        if n % factor == 0:
+            large_factor = factor
+        factor += 1
+    return large_factor
 
-# Q4
+# Q4  我没看懂这题什么意思..
 def if_function(condition, true_result, false_result):
     """Return true_result if condition is a true value, and
     false_result otherwise.
@@ -81,13 +87,15 @@ def with_if_function():
 
 def c():
     "*** YOUR CODE HERE ***"
+    return True
 
 def t():
     "*** YOUR CODE HERE ***"
+    return 1
 
 def f():
     "*** YOUR CODE HERE ***"
-
+    return 0
 # Q5
 def hailstone(n):
     """Print the hailstone sequence starting at n and return its
@@ -105,3 +113,13 @@ def hailstone(n):
     7
     """
     "*** YOUR CODE HERE ***"
+    step = 1
+    while n != 1:
+        print(n)
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = n * 3 + 1
+        step += 1
+    print(n)
+    return step
