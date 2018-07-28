@@ -12,5 +12,4 @@ def lambda_curry2(func):
     8
     """
     "*** YOUR CODE HERE ***"
-    k = lambda x:func(x)
-    return k
+    return lambda arg1: lambda arg2: func(arg1, arg2)
