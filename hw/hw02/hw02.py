@@ -27,7 +27,7 @@ def make_adder(n):
     3
     """
     "*** YOUR CODE HERE ***"
-    return 'REPLACE ME'
+    return lambda k:n+k
 
 # Q2
 def double_eights(n):
@@ -51,6 +51,12 @@ def double_eights(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    if n == 0:
+        return False
+    prev, last = n // 10 % 10, n % 10
+    if prev == 8 and last == 8:
+        return True
+    return double_eights(n//10)
 
 # Q3
 def product(n, term):
@@ -74,7 +80,13 @@ def product(n, term):
     >>> check(HW_SOURCE_FILE, 'product', ['Recursion'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    "*** YOUR CODE HERE ***"  
+    time = 0
+    total = 1
+    while time < n:
+        total *= term(n)
+        n -= 1
+    return total    
 
 # The identity function, defined using a lambda expression!
 identity = lambda k: k
@@ -91,7 +103,7 @@ def factorial(n):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    return product(n, identity)
 # Q4
 def summation(n, term):
 
@@ -112,6 +124,11 @@ def summation(n, term):
     """
     assert n >= 1
     "*** YOUR CODE HERE ***"
+    if n == 1:
+        return term(n)
+    else:
+        return summation(n-1,term)+term(n)
+    
 
 # Q5
 def accumulate(combiner, base, n, term):
@@ -131,7 +148,11 @@ def accumulate(combiner, base, n, term):
     72
     """
     "*** YOUR CODE HERE ***"
-
+    time, total = 0, base
+    while time < n:
+        total = combiner(total, term(n))
+        n -= 1
+    return total
 def summation_using_accumulate(n, term):
     """Returns the sum of term(1) + ... + term(n). The implementation
     uses accumulate.
@@ -146,6 +167,7 @@ def summation_using_accumulate(n, term):
     True
     """
     "*** YOUR CODE HERE ***"
+    return accumulate(add, 0, n ,term)
 
 def product_using_accumulate(n, term):
     """An implementation of product using accumulate.
@@ -160,6 +182,7 @@ def product_using_accumulate(n, term):
     True
     """
     "*** YOUR CODE HERE ***"
+    return accumulate(mul, 1, n ,term)
 
 # Q6
 def filtered_accumulate(combiner, base, pred, n, term):
@@ -187,6 +210,10 @@ def filtered_accumulate(combiner, base, pred, n, term):
     """
     def combine_if(x, y):
         "*** YOUR CODE HERE ***"
+        if pred(y):
+            return combiner(x,y)
+        else:
+            return x
     return accumulate(combine_if, base, n, term)
 
 def odd(x):
@@ -218,6 +245,11 @@ def make_repeater(f, n):
     5
     """
     "*** YOUR CODE HERE ***"
+    g = identity
+    while n > 0:
+        g = compose1(f,g)
+        n -= 1
+    return g
 
 ###################
 # Extra Questions #
