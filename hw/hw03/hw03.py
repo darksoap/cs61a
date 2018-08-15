@@ -23,6 +23,10 @@ def g(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    if n <= 3:
+        return n
+    else:
+        return g(n - 1) + 2 * g(n - 2) + 3 * g(n - 3)
 
 def g_iter(n):
     """Return the value of G(n), computed iteratively.
@@ -42,6 +46,16 @@ def g_iter(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    total = 0
+    if n <= 3:
+        return n
+    else:
+        total, k = 0, 1
+        while k <= 3:
+            total += k * g(n - k)
+            k += 1
+        return total
+            
 
 # Q2
 def pingpong(n):
@@ -76,7 +90,18 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    def next(x, i, step): 
+        if i == n:
+            return x
+        return next(x + step, i + 1, check(step, i + 1))
 
+    def check(step, i):
+        if  i % 7 == 0 or has_seven(i):
+            return -step
+        return step
+        
+    return next(1, 1, 1)
+        
 def has_seven(k):
     """Returns True if at least one of the digits of k is a 7, False otherwise.
 
@@ -117,6 +142,26 @@ def count_change(amount):
     True
     """
     "*** YOUR CODE HERE ***"
+    return count_coin(amount, max(amount))
+
+def max(amount):
+    coin = 1
+    while coin * 2 < amount:
+        coin *= 2
+    return coin
+
+def count_coin(amount, coin):
+    if amount == 0:
+        return 1
+    elif amount < 0:
+        return 0
+    elif coin == 0:
+        return 0
+    else:
+        with_coin = count_coin(amount - coin, coin)
+        without_coin = count_coin(amount, coin // 2)
+        return with_coin + without_coin
+
 
 # Q4
 def print_move(origin, destination):
@@ -152,6 +197,21 @@ def move_stack(n, start, end):
     """
     assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
     "*** YOUR CODE HERE ***"
+    if start == 1 and end == 3:
+        rest = 2
+    elif start == 2 and end == 3:
+        rest = 1
+    else:
+        rest = 3
+    def Hanoi(n, start, end, rest):
+        if n == 1:
+            print_move(start, end)
+        else:
+            Hanoi(n - 1, start, rest, end)
+            Hanoi(1, start, end, rest)
+            Hanoi(n - 1, rest, end, start)
+    return Hanoi(n, start, end, rest)
+
 
 # Q5
 def replace_leaf(t, old, new):
@@ -184,6 +244,13 @@ def replace_leaf(t, old, new):
     True
     """
     "*** YOUR CODE HERE ***"
+    m = []
+    if is_leaf(t):
+        if label(t) == old:
+            return tree(new)
+    for b in branches(t):
+        m += [replace_leaf(b, old, new)]
+    return tree(label(t), m)
 
 # Tree ADT
 def tree(label, branches=[]):
