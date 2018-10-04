@@ -1,2 +1,2 @@
-cs61a Summer 2018
-skip optional question
+CS 61A Summer 2018
+Skip optional question
