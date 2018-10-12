@@ -14,4 +14,4 @@
 )
 
 (define-macro (list-of expr for var in seq if filter-fn)
-)
+  `(map ((lambda (,var) ,expr) (filter (lambda (,var) ,filter-fn) ,seq))))
